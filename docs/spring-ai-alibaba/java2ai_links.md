@@ -25,7 +25,7 @@
     - [检索增强生成 (RAG)](https://java2ai.com/docs/frameworks/agent-framework/advanced/rag)
     - [分布式智能体 (A2A Agent)](https://java2ai.com/docs/frameworks/agent-framework/advanced/a2a)
 - **Graph Core**
-  - [Graph 工作流编排指南](https://java2ai.com/docs/frameworks/graph-core/quick-start)
+  - [Graph 工作流编排指南](graph-quick-start.md)
   - **核心功能**
     - [核心概念](https://java2ai.com/docs/frameworks/graph-core/core/core-library)
     - [内存管理](https://java2ai.com/docs/frameworks/graph-core/core/memory)
