@@ -654,25 +654,25 @@ ReactAgent agent = ReactAgent.builder()
 
 通过 `OutputType` 枚举可以区分不同节点的输出，以及判断是流式增量内容还是完成输出：
 
-| OutputType | 说明 |
-| --- | --- |
-| `AGENT_MODEL_STREAMING` | 模型推理的流式增量内容 |
-| `AGENT_MODEL_FINISHED` | 模型推理完成，可获取全量内容 |
-| `AGENT_TOOL_STREAMING` | 工具调用的流式增量内容 |
-| `AGENT_TOOL_FINISHED` | 工具调用完成 |
-| `AGENT_HOOK_STREAMING` | Hook 节点的流式增量内容 |
-| `AGENT_HOOK_FINISHED` | Hook 节点完成 |
+| OutputType              | 说明             |
+| ----------------------- | -------------- |
+| `AGENT_MODEL_STREAMING` | 模型推理的流式增量内容    |
+| `AGENT_MODEL_FINISHED`  | 模型推理完成，可获取全量内容 |
+| `AGENT_TOOL_STREAMING`  | 工具调用的流式增量内容    |
+| `AGENT_TOOL_FINISHED`   | 工具调用完成         |
+| `AGENT_HOOK_STREAMING`  | Hook 节点的流式增量内容 |
+| `AGENT_HOOK_FINISHED`   | Hook 节点完成      |
 
 #### 消息类型识别
 
 `StreamingOutput.message()` 返回的消息有多种类型，需要结合 `OutputType` 和消息元数据进行区分处理：
 
-| OutputType | 消息类型 | 判断条件 | 说明 |
-| --- | --- | --- | --- |
-| `AGENT_MODEL_STREAMING` / `AGENT_MODEL_FINISHED` | 模型普通响应 | `AssistantMessage` 且 `metadata.reasoningContent` 为空 | 模型的实际回复内容，通过 `getText()` 获取 |
+| OutputType                                       | 消息类型        | 判断条件                                                 | 说明                                   |
+| ------------------------------------------------ | ----------- | ---------------------------------------------------- | ------------------------------------ |
+| `AGENT_MODEL_STREAMING` / `AGENT_MODEL_FINISHED` | 模型普通响应      | `AssistantMessage` 且 `metadata.reasoningContent` 为空  | 模型的实际回复内容，通过 `getText()` 获取          |
 | `AGENT_MODEL_STREAMING` / `AGENT_MODEL_FINISHED` | 模型 Thinking | `AssistantMessage` 且 `metadata.reasoningContent` 不为空 | 模型的思考过程（如 DeepSeek 等支持 Thinking 的模型） |
-| `AGENT_MODEL_FINISHED` | 工具调用请求 | `AssistantMessage` 且 `hasToolCalls()` 为 `true` | 模型请求调用工具，包含工具名称和参数 |
-| `AGENT_TOOL_FINISHED` | 工具响应结果 | `ToolResponseMessage` | 工具执行后的返回结果 |
+| `AGENT_MODEL_FINISHED`                           | 工具调用请求      | `AssistantMessage` 且 `hasToolCalls()` 为 `true`       | 模型请求调用工具，包含工具名称和参数                   |
+| `AGENT_TOOL_FINISHED`                            | 工具响应结果      | `ToolResponseMessage`                                | 工具执行后的返回结果                           |
 
 消息类型识别示例 [查看完整代码](https://github.com/alibaba/spring-ai-alibaba/tree/main/examples/documentation/src/main/java/com/alibaba/cloud/ai/examples/documentation/framework/tutorials/AgentsExample.java "查看完整源代码")
 

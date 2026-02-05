@@ -70,3 +70,7 @@ modified_mcp_config.json
 
 .checkstyle
 docs/.obsidian/*
+docs/.smart-env
+docs/.claude/sessions
+docs/copilot-conversations
+docs/copilot

@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3:*)",
+      "Bash(python:*)",
+      "Bash(mkdir -p .claude/skills/zk-guide)",
+      "Write(.claude/skills/zk-guide/SKILL.md)"
+    ]
+  }
+}
