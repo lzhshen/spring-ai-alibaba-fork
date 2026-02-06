@@ -10,16 +10,18 @@ created: 2026-02-05
 
 # Agent 定义与 ReAct 范式
 
-**Agent** 是将大语言模型（LLM）与外部工具（Tools）结合的自动化系统。相比于单纯的 LLM 调用，Agent 增加了 **自主规划（Reasoning）** 和 **工具使用（Acting）** 两个核心能力。
+## 核心理解 (My Understanding)
+*   **Agent 能力**：“Agent 相比普通的大模型调用，增加了以下两个能力：1. 工具调用；2. 根据工具调用的结果进行思考和推理，从而决定下一步采取什么动作。”
+*   **ReAct 机制**：“ReAct 的方式能够动态地思考和规划下一步。它将一个目标拆解为多个任务，每次调用完工具后，都会根据返回的结果来判断下一次的执行步骤。”
+*   **执行逻辑**：“(a) 如果已经满足条件或达到最大执行次数，则停止；(b) 否则，它会继续执行下一个步骤和动作。”
 
-## ReAct 循环
-Agent 的运行基于 **ReAct (Reasoning + Acting)** 范式，形成一个闭环：
-1.  **思考 (Reasoning)**：模型分析当前情况，决定下一步行动。
-2.  **行动 (Acting)**：执行工具调用。
-3.  **观察 (Observation)**：接收工具执行的结果反馈。
-4.  **循环**：基于观察结果再次思考，直到任务完成或达到停止条件。
+## 补充/修正 (Refinements)
+*   *(注：ReAct 是 Reasoning + Acting 的缩写，核心在于“观察-思考-行动”的闭环)*
 
-此范式让 Agent 能够处理复杂任务，并在不确定的环境中动态调整策略。
-
-## 关联笔记
-- [[Spring AI Alibaba Graph 运行时架构]] - 实现 ReAct 的底层架构
+## 官方定义与溯源 (Reference)
+> [!quote] Source
+> 原始文档：[[Agentic-Framework/01-Agents.md]]
+>
+> > [!info] Original Text
+> > 一个 LLM Agent 在循环中通过运行工具来实现目标。Agent 会一直运行直到满足停止条件 —— 即当模型输出最终答案或达到迭代限制时。
+> > ReAct（Reasoning + Acting）是一种将推理和行动相结合的 Agent 范式。

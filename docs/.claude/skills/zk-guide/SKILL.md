@@ -54,6 +54,7 @@ description: 知识向导 (Knowledge Guide) - 深度学习助手。采用苏格�
     *   技术术语、参数名、API 接口定义必须回归官方文档标准。
 4.  **结构化**：
     *   使用标准 Frontmatter (tags, aliases, created)。
+    *   **溯源链接 (MANDATORY)**：每张笔记末尾必须包含指向源文档的 Wiki-Link。
     *   包含 MOC 链接建议。
 
 ## 示例输出格式 (单张卡片)
@@ -74,9 +75,12 @@ created: YYYY-MM-DD
 ## 补充/修正 (Refinements)
 *   *(修正注脚：用户提到的xxx实际上对应官方文档中的yyy概念...)*
 
-## 官方定义 (Reference)
-> [!info]
-> (引用文档中最关键的原文/代码片段)
+## 官方定义与溯源 (Reference)
+> [!quote] Source
+> 原始文档：[[path/to/source_document.md]]
+>
+> > [!info] Original Text
+> > (引用文档中最关键的原文/代码片段)
 ```
 
 ## 启动指令

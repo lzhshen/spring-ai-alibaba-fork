@@ -10,24 +10,21 @@ created: 2026-02-05
 
 # Agent 结构化输出策略
 
-Agent 输出结构化数据（如 JSON）主要有两种策略，适用于不同场景。
+## 核心理解 (My Understanding)
+*   **OutputType (静态)**：“提供了一个编译时的类型安全（Type-safe）。”
+    *   *(注：通过 Java Class 定义，结构在编译时确定)*
+*   **OutputSchema (动态)**：“如果使用 Schema 的话，结构是可以动态生成的。”
+    *   *(注：适合运行时才能确定字段的场景)*
+*   **流式输出区分**：“通过 output type 来去区分... 总共 6 种类型... 分别对应到这三个节点：模型，工具，Hooks。”
+*   **工具完成信号**：“用户能够知道他的这个工具调用返回结束。”
+    *   *(注：即 AGENT_TOOL_FINISHED 类型)*
 
-## 1. OutputType (静态/强类型)
-*   **机制**：直接绑定一个 Java POJO 类（如 `PoemOutput.class`）。
-*   **特点**：**编译时静态定义**。
-*   **优势**：类型安全，IDE 自动补全，编译器检查。
-*   **适用**：业务结构固定，明确知道返回字段的场景。
+## 补充/修正 (Refinements)
+*   *(注：OutputSchema 可以配合 BeanOutputConverter 使用)*
 
-## 2. OutputSchema (动态/灵活)
-*   **机制**：传入一个描述 JSON 结构的字符串 Schema。
-*   **特点**：**运行时动态生成**。
-*   **优势**：极其灵活，可以在运行时根据用户意图构建不同的输出结构（如动态表单、通用网关）。
-*   **适用**：低代码平台、结构不确定的动态场景。
-
-## 流式输出类型
-通过 `OutputType` 枚举区分流式消息：
-*   `AGENT_MODEL_STREAMING`：模型生成的文本（包含 Thinking 过程）。
-*   `AGENT_TOOL_FINISHED`：工具执行完成的信号（用于前端展示进度）。
-
-## 关联笔记
-- [[Agent 定义与 ReAct 范式]]
+## 官方定义与溯源 (Reference)
+> [!quote] Source
+> 原始文档：[[Agentic-Framework/01-Agents.md]]
+>
+> > [!info] Original Text
+> > 在某些情况下，你可能希望 Agent 以特定格式返回输出。ReactAgent 提供了两种策略：使用 outputType... 使用 outputSchema。

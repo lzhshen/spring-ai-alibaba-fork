@@ -10,18 +10,19 @@ created: 2026-02-05
 
 # Agent 工具与上下文感知
 
-在 Spring AI Alibaba 中，自定义工具不只是单纯的函数，而是具备**上下文感知**能力的组件。
+## 核心理解 (My Understanding)
+*   **接口实现**：“它实现了 apply 接口... 具体是用 BiFunction。”
+*   **参数逻辑**：“Function 的输入是由它的参数个数来决定的。”
+    *   *(注：因为需要同时传入 **Query** 和 **ToolContext** 两个参数，所以必须使用 BiFunction)*
+*   **错误反馈**：“工具抛出异常... 会把错误消息传回给大模型”，从而让 Agent 决定是“修复错误”还是“换别的工具”。
 
-## BiFunction 接口
-工具类通常实现 `BiFunction<T, ToolContext, R>` 接口：
-*   **输入 1 (T)**：模型传递的业务参数（如查询关键词）。
-*   **输入 2 (ToolContext)**：框架运行时注入的上下文（如 UserID, SessionID, TraceID）。
-*   **输出 (R)**：返回给模型的执行结果。
+## 补充/修正 (Refinements)
+*   *(注：ToolContext 包含了 UserID 等框架注入的元数据，让工具具备上下文感知能力)*
 
-这种设计允许工具在执行时利用环境信息，实现"看人下菜碟"或鉴权等高级功能。
-
-## 鲁棒性设计
-工具应当捕获内部异常，并返回描述性的错误信息（而非直接抛出 Exception），以便 Agent 能够理解错误原因并尝试自我修正。
-
-## 关联笔记
-- [[Agent 定义与 ReAct 范式]]
+## 官方定义与溯源 (Reference)
+> [!quote] Source
+> 原始文档：[[Agentic-Framework/01-Agents.md]]
+>
+> > [!info] Original Text
+> > 工具赋予 Agent 执行操作的能力...
+> > public class SearchTool implements BiFunction<String, ToolContext, String>

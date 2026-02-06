@@ -10,20 +10,16 @@ created: 2026-02-05
 
 # Agent 记忆与持久化
 
-Agent 的**记忆 (Memory)** 实际上是对对话状态（State）的维护。
+## 核心理解 (My Understanding)
+*   **无记忆状态**：“如果不配置 Memory Saver，模型目前应该是记不住上一句说了什么。”
+*   **生产环境建议**：“如果将 Typeless Memory Saver 用于生产环境，最好是使用一个 Redis Saver 或者其他持久化的存储方式（比如 MongoDB 等数据库）。”
 
-## Saver 机制
-框架通过 `Saver` 接口抽象了状态存储：
-1.  **MemorySaver**：
-    *   存储在 JVM 堆内存中。
-    *   **特点**：速度快，但重启即失，不支持多实例共享。
-    *   **场景**：开发调试、本地测试。
-2.  **持久化 Saver** (如 RedisSaver, JdbcSaver)：
-    *   存储在外部数据库或缓存中。
-    *   **特点**：数据持久化，支持集群部署。
-    *   **场景**：**生产环境必选**。
+## 补充/修正 (Refinements)
+*   *(注：MemorySaver 仅存储在 JVM 内存中，重启即失，且不支持多实例共享)*
 
-若不配置 Saver，Agent 将无法在多轮对话中保持上下文（即"金鱼记忆"）。
-
-## 关联笔记
-- [[Spring AI Alibaba Graph 运行时架构]]
+## 官方定义与溯源 (Reference)
+> [!quote] Source
+> 原始文档：[[Agentic-Framework/01-Agents.md]]
+>
+> > [!info] Original Text
+> > Agent 通过状态自动维护对话历史。使用 MemorySaver 配置持久化存储... 生产环境：使用 RedisSaver、MongoSaver 等持久化存储替代 MemorySaver。
